@@ -1,0 +1,54 @@
+== Introduction ==
+
+IrssiGrowl is a simple plugin script for Irssi, that will allow you to receive
+notifications on your OS X desktop. This is useful if, like me, you use irssi
+for IRC in a shell on your Mac, and wish to receive notifications of mentions
+or PM activity when using a different application on a different space.
+
+You could also use it if, for example, you have a linux box on your network
+that you use for IRC, and connect from a Mac... the linux box could run the
+script, and send the Growl notifications to the remote Mac.
+
+I tried to install Mac::Growl on my x86_64 Snow Leopard install, and it failed
+so I looked at Net::Growl... this, actually, provides for a better solution
+(for me, anyway) due to the ability to do the second scenario listed above.
+
+
+== Requirements ==
+
+* Net::Growl and any pre-requisit modules it requires.
+
+
+== Installation ==
+
+Grab growl.pl, and drop it in ~/.irssi/scripts/
+
+If you want it to autorun, copy, or symlink it to ~/.irssi/scripts/autorun/
+
+You can load it manually with /script load growl
+
+
+== Configuration ==
+
+There are two settings, currently, as follows:
+
+  - growl_password
+
+    This is used to set the password the used to talk to Growl, and should be
+    the same password you set on the Mac in Growl's network settings.
+
+  - growl_host
+
+    This is the host you wish to send notifications to. Defaults to 'localhost'.
+
+
+== Support, Requests, etc ==
+
+Currently, it seems to do what I want, and I regret that at the current time,
+time is very short, so modifying it is unlikely unless I find it's broken for me.
+
+If you want a new feature, by all means ask, and I'll see what I can do.
+
+If it's broken, by all means tell me, and I'll see what I can do.
+
+If you have the skills and modify it, by all means send me a patch.
