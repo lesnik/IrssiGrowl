@@ -17,7 +17,8 @@ so I looked at Net::Growl... this, actually, provides for a better solution
 == Requirements ==
 
 * Net::Growl and any pre-requisit modules it requires.
-
+* If you want to use the sticky notifications feature, you'll either need a Net::Growl
+  newer than 2005 (0.99) or you'll need to patch 0.99 with the patch on here (GitHub).
 
 == Installation ==
 
@@ -60,6 +61,7 @@ If you change these settings, you seem to need to reload the script. I don't kno
 there's a way around this or not, and as it's a set-it-and-forget-it type setting
 I'm not going to spend ages looking into it right now.
 
+
 == Known Issues ==
 
 The Net::Growl module doesn't seem to make sticky notifications actually sticky.
@@ -77,6 +79,7 @@ I read http://the.taoofmac.com/space/projects/netgrowl.php which indicated that
 0x100 was correct (256 in decimal) rather than 0x0001. 
 
 With the change in place, notifications correctly become sticky.
+
 
 == Support, Requests, etc ==
 

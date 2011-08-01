@@ -1,4 +1,12 @@
-130c130
-<         $flags = $flags | 0x0001;
----
-> 	$flags |= 0x100;
+--- Growl.pm.original	2011-08-01 20:10:59.000000000 +0100
++++ Growl.pm	2011-08-01 20:11:34.000000000 +0100
+@@ -127,7 +127,7 @@
+         $flags |= 0x08;
+     }
+     if ( $args{sticky} ) {
+-        $flags = $flags | 0x0001;
++	$flags |= 0x100;
+     }
+     $self->{data} = pack( "c2n5",
+                           $self->GROWL_PROTOCOL_VERSION,
+
