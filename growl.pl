@@ -29,6 +29,25 @@
 #
 
 #--------------------------------------------------------------------
+# Settings
+#--------------------------------------------------------------------
+
+# There are a couple of settings:
+#
+# * growl_password
+#   This sets the password.
+#
+# * growl_host
+#   This is the host to send notifications to.
+#
+# * growl_sticky
+#   This defines which notifications, if any, should be sticky
+#   * hilight or mention - When your nick is mentioned in a channel
+#   * pm or priv - When you receive a PM
+#   * all or both - As it says, really...
+#   * anything else gets treated as "none".
+
+#--------------------------------------------------------------------
 # ...on with the code...
 #--------------------------------------------------------------------
 
@@ -66,6 +85,10 @@ Irssi::settings_add_str('growl', 'growl_password' => 'growl');
 $config{'growl_password'} = Irssi::settings_get_str('growl_password');
 $config{'growl_password'} ||= undef;
 
+Irssi::settings_add_str('growl', 'growl_sticky' => 'growl');
+$config{'growl_sticky'} = Irssi::settings_get_str('growl_sticky');
+$config{'growl_sticky'} ||= undef;
+
 #--------------------------------------------------------------------
 # Register With Growl
 #--------------------------------------------------------------------
@@ -82,7 +105,8 @@ register(
 
 sub priv_msg {
 	my ($server,$msg,$nick,$address,$target) = @_;
-	growl($nick." " .$msg );
+	my $sticky = $config{'growl_sticky'} =~ m/^(pm|priv|all|both)$/i ? 1 : 0;
+	growl($nick, $msg, $sticky);
 }
 
 #--------------------------------------------------------------------
@@ -92,7 +116,8 @@ sub priv_msg {
 sub hilight {
     my ($dest, $text, $stripped) = @_;
     if ($dest->{level} & MSGLEVEL_HILIGHT) {
-	growl($dest->{target}. " " .$stripped );
+	my $sticky = $config{'growl_sticky'} =~ m/^(mention|hilight|all|both)$/i ? 1 : 0;
+	growl($dest->{target}, $stripped, $sticky);
     }
 }
 
@@ -101,15 +126,14 @@ sub hilight {
 #--------------------------------------------------------------------
 
 sub growl {
-	my ($text) = @_;
-	my($nick, $message) = $text =~ m/^(\S+)\s(.*)$/;
+	my($nick, $message, $sticky) = @_;
 	notify(
 		application => 'irssi',
 		title => $nick,
 		description => $message,
 		priority => 2,
-		sticky => 'False',
-		password => $config{'growl_password'},
+		sticky => $sticky,
+		password => 'smirk',
 	);
 }
 

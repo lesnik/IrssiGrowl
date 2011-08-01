@@ -41,6 +41,42 @@ There are two settings, currently, as follows:
 
     This is the host you wish to send notifications to. Defaults to 'localhost'.
 
+  - growl_sticky
+
+    This defines which notifications should be 'sticky'. Can be set to:
+
+    - mention or hilight
+      When your nick is mentioned in a channel
+
+    - priv or pm
+      When someone says something to you in a PM
+
+    - all or both
+      As it says, really...
+
+    - Anything else is treated as 'none' and the notifications won't be sticky.
+
+If you change these settings, you seem to need to reload the script. I don't know if
+there's a way around this or not, and as it's a set-it-and-forget-it type setting
+I'm not going to spend ages looking into it right now.
+
+== Known Issues ==
+
+The Net::Growl module doesn't seem to make sticky notifications actually sticky.
+
+I've tested this on my install of Snow Leopard.
+
+It seems the Net::Growl module doesn't set the flag correctly, and so I've patched
+it to do so. I've tested the patch and it seems to work (again, for me, in my
+environment).
+
+I'll attempt to submit my patch to the Net::Growl author, in the mean time, I'll
+make it available for download.
+
+I read http://the.taoofmac.com/space/projects/netgrowl.php which indicated that
+0x100 was correct (256 in decimal) rather than 0x0001. 
+
+With the change in place, notifications correctly become sticky.
 
 == Support, Requests, etc ==
 
