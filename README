@@ -31,7 +31,7 @@ You can load it manually with /script load growl
 
 == Configuration ==
 
-There are two settings, currently, as follows:
+There are three settings, currently, as follows:
 
   - growl_password
 
